@@ -1,6 +1,7 @@
 import {  Copy, Facebook, Linkedin } from 'lucide-react'
 import { FaWhatsapp } from 'react-icons/fa'
 import { toast } from 'react-toastify'
+import { Users } from 'lucide-react'
 
 const ReferEarnSection = ({ referralLink }: any) => {
   const copy = () => {
@@ -14,7 +15,14 @@ const ReferEarnSection = ({ referralLink }: any) => {
         <div className="w-1 h-6 bg-purple-600 rounded-full" />
         <h2 className="text-xl font-bold text-gray-900">Refer & Earn</h2>
       </div>
-      <div className="bg-[#F9F9FF] border border-purple-50 rounded-[2.5rem] p-8">
+      <div className='flex items-center gap-3 bg-[#EEF2FF] border border-purple-100  p-4 mb-6'>
+        <div><Users size={24} className="text-purple-600" /></div>
+        <div>
+          <h3 className='font-bold '>Share Your Link</h3>
+          <small>Invite friends and earn 25 points when they join!</small>
+        </div>
+      </div>
+      <div className=" border border-purple-50 rounded-[2.5rem] p-8">
         <div className="grid grid-cols-2 gap-4 mb-12 text-center">
           <div>
             <p className="text-3xl font-black text-purple-600">0</p>
@@ -25,6 +33,7 @@ const ReferEarnSection = ({ referralLink }: any) => {
             <p className="text-sm text-gray-500 font-medium">Points Earned</p>
           </div>
         </div>
+  
         <div className="flex items-center gap-2 bg-white border border-gray-100 rounded-2xl p-2 pl-4 shadow-sm">
           <input
             type="text"

@@ -1,41 +1,56 @@
 import React, { useState } from 'react'
 import { Mail, UserPlus } from 'lucide-react'
+import { useNavigate } from 'react-router-dom'
 import { supabase } from '../../lib/supabaseClient'
 import PasswordField from './PasswordField'
+import { toast, ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 const SignUpForm = ({ onSwitch }: { onSwitch: () => void }) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
   const [loading, setLoading] = useState(false)
+  const navigate = useNavigate()
 
   const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault()
-    if (password !== confirmPassword) return alert('Passwords do not match!')
+    if (password !== confirmPassword) return toast.error('Passwords do not match!')
 
     setLoading(true)
     try {
-      const { error } = await supabase.auth.signUp({ email, password })
+      const { data, error } = await supabase.auth.signUp({ email, password })
+      
       if (error) {
-        alert(error.message)
-      } else {
-        alert('Success! Please check your email for a verification link.')
-        onSwitch() 
+        toast.error(error.message)
+      } else if (data.user) {
+        toast.success('Account created successfully!')
+        
+        setTimeout(() => {
+          navigate('/dashboard/rewards/earn')
+        }, 2000)
       }
     } catch (err) {
-      alert('Connection failed: Could not reach Supabase. Check your .env.local settings.')
+      toast.error('Connection failed: Check your internet settings.')
     } finally {
       setLoading(false)
     }
   }
 
   const handleGoogleAuth = async () => {
-    const { error } = await supabase.auth.signInWithOAuth({ provider: 'google' })
-    if (error) alert(error.message)
+    const { error } = await supabase.auth.signInWithOAuth({ 
+      provider: 'google',
+      options: {
+        redirectTo: `${window.location.origin}/dashboard/rewards/earn`
+      }
+    })
+    if (error) toast.error(error.message)
   }
 
   return (
     <div className="w-full max-w-md mx-auto animate-in fade-in duration-500">
+      <ToastContainer position="top-center" theme="colored" autoClose={3000} />
+      
       <div className="flex flex-col items-center mb-6">
         <div className="w-16 h-16 bg-purple-50 rounded-full flex items-center justify-center mb-4">
           <UserPlus className="text-[#6B21A8] w-8 h-8" />
@@ -45,6 +60,7 @@ const SignUpForm = ({ onSwitch }: { onSwitch: () => void }) => {
 
       <button
         onClick={handleGoogleAuth}
+        type="button"
         className="w-full mb-6 flex items-center justify-center gap-3 border border-gray-200 py-3 rounded-xl hover:bg-gray-50 transition-all font-medium text-gray-700 cursor-pointer"
       >
         <img
@@ -64,7 +80,7 @@ const SignUpForm = ({ onSwitch }: { onSwitch: () => void }) => {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full pl-12 pr-4 py-3.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#6B21A8] outline-none"
+              className="w-full pl-12 pr-4 py-3.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#6B21A8] outline-none transition-all"
               placeholder="Enter your email"
               required
             />

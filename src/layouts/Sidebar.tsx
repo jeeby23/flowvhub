@@ -48,7 +48,6 @@ const Sidebar = ({ onClose }: SidebarProps) => {
 
   return (
     <aside className="w-64 border-r border-gray-100 h-screen flex flex-col p-6 bg-white shadow-sm relative">
-      {/* Logo Section */}
       <div className="flex items-center justify-between mb-10 px-2">
         <div className="flex items-center gap-2">
           <img src={brandLogo} alt="Flowva Logo" />
@@ -63,7 +62,6 @@ const Sidebar = ({ onClose }: SidebarProps) => {
         </button>
       </div>
 
-      {/* Navigation */}
       <nav className="flex-1 space-y-1">
         {menuItems.map((item) => (
           <NavLink

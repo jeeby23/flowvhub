@@ -53,9 +53,9 @@ const RewardsPage = () => {
   return (
     <div className="relative min-h-screen">
       <div className="flex justify-between items-start mb-6">
-        <header>
-          <h1 className="text-3xl font-bold text-gray-900">Rewards Hub</h1>
-          <p className="text-gray-500 mt-1">Earn points, unlock rewards, and celebrate your progress!</p>
+        <header className="font-roboto">
+          <h1 className="text-3xl font-medium text-gray-900 ">Rewards Hub</h1>
+          <p className="text-gray-500 mt-1 font-normal">Earn points, unlock rewards, and celebrate your progress!</p>
         </header>
 
         <div className="relative">
@@ -63,7 +63,7 @@ const RewardsPage = () => {
             onClick={() => setShowNotifications(!showNotifications)}
             className="p-3 bg-slate-100 rounded-full text-slate-600 hover:bg-slate-200 transition-all relative"
           >
-            <Bell size={22} />
+            <Bell size={22} className='fill-black'/>
             {unreadCount > 0 && (
               <span className="absolute top-0 right-0 w-5 h-5 bg-red-500 text-white text-[10px] flex items-center justify-center rounded-full border-2 border-white animate-pulse">
                 {unreadCount}
@@ -76,8 +76,8 @@ const RewardsPage = () => {
       </div>
 
       <div className="flex gap-4 mb-8">
-        <NavLink to="/dashboard/rewards/earn" className={({ isActive }) => `px-6 py-2 text-sm font-bold transition-all ${isActive ? 'bg-[#F4EFFB] text-[#9012FE] border-b-2 transition ease-in ' : ' text-gray-500 hover:bg-[#F4EFFB]'}`}>Earn Points</NavLink>
-        <NavLink to="/dashboard/rewards/redeem" className={({ isActive }) => `px-6 py-2 text-sm font-bold transition-all ${isActive ? 'bg-[#F4EFFB] text-[#9012FE] border-b-2 transition ease-in' : ' text-gray-500 hover:bg-[#F4EFFB]'}`}>Redeem Rewards</NavLink>
+        <NavLink to="/dashboard/rewards/earn" className={({ isActive }) => `px-6 py-2 text-[16px] leading-6 font-normal transition-all ${isActive ? 'bg-[#F4EFFB] text-[#9012FE] border-b-2 transition ease-in ' : ' text-gray-500 hover:bg-[#F4EFFB]'}`}>Earn Points</NavLink>
+        <NavLink to="/dashboard/rewards/redeem" className={({ isActive }) => `px-6 py-2 text-[16px] leading-6 font-normal transition-all ${isActive ? 'bg-[#F4EFFB] text-[#9012FE] border-b-2 transition ease-in' : ' text-gray-500 hover:bg-[#F4EFFB]'}`}>Redeem Rewards</NavLink>
       </div>
 
       {isRedeemTab ? (
@@ -87,7 +87,7 @@ const RewardsPage = () => {
             <h2 className="text-2xl font-bold text-gray-900">Redeem Your Points</h2>
           </div>
           
-          <div className="flex gap-3 mb-8 overflow-x-auto pb-2">
+          <div className="flex gap-3 mb-8 overflow-x-auto pb-2 ">
             {[
               { name: 'All Rewards', count: rewards.length },
               { name: 'Unlocked', count: rewards.filter(r => r.type === 'Unlocked').length },
@@ -97,7 +97,7 @@ const RewardsPage = () => {
               <button 
                 key={f.name} 
                 onClick={() => setFilter(f.name)} 
-                className={`px-5 py-2 rounded-xl text-sm font-bold whitespace-nowrap border transition-all ${filter === f.name ? 'bg-purple-50 border-purple-200 text-purple-600' : 'bg-white border-gray-100 text-gray-400'}`}
+                className={`px-5 py-2 rounded-xl text-[16px] font-normal whitespace-nowrap border transition-all ${filter === f.name ? 'bg-purple-50 border-purple-200 text-purple-600' : 'bg-white border-gray-100 text-gray-400'}`}
               >
                 {f.name} <span className="ml-1 opacity-60 bg-purple-200 px-1.5 rounded text-[10px]">{f.count}</span>
               </button>

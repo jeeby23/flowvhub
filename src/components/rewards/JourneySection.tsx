@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Star, Calendar, Zap, Loader2, UserPlus } from 'lucide-react';
 import ClaimPointsModal from './ClaimPointsModal';
-
+import reclaim from '../../assets/reclaim.webp';
 const JourneySection = ({ points, streak, loading, canClaim, claiming, onClaim }: any) => {
   const [isClaimModalOpen, setIsClaimModalOpen] = useState(false);
   const progressPercent = Math.min((points / 5000) * 100, 100);
@@ -16,13 +16,13 @@ const JourneySection = ({ points, streak, loading, canClaim, claiming, onClaim }
 
       <div className="flex items-center gap-3 mb-6">
         <div className="w-1 h-6 bg-purple-600 rounded-full" />
-        <h2 className="text-xl font-bold text-gray-900">Your Rewards Journey</h2>
+        <h2 className="text-[18px] font-semibold text-gray-900 leading-7">Your Rewards Journey</h2>
       </div>
       
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div className="bg-white p-8 rounded-[2.5rem] border border-gray-100 shadow-sm relative overflow-hidden flex flex-col justify-between">
+        <div className="bg-white p-8 rounded-xl border border-gray-100 shadow-sm relative overflow-hidden flex flex-col justify-between">
           <div>
-            <div className="text-purple-600 mb-4 flex items-start gap-3 "><Star fill="currentColor" size={24} /> <h3 className="text-sm font-bold text-gray-400 uppercase tracking-wider">Points Balance</h3>
+            <div className="text-purple-600 mb-4 flex items-start gap-3 "><Star fill="currentColor" size={24} /> <h3 className="text-[15px] leading-4 font-semibold text-[#374151] uppercase tracking-wider">Points Balance</h3>
              
             </div>
             <div className="text-4xl font-black text-purple-600 my-4 flex justify-between">{loading ? <Loader2 className="animate-spin" /> : points}
@@ -38,7 +38,7 @@ const JourneySection = ({ points, streak, loading, canClaim, claiming, onClaim }
           </div>
         </div>
 
-        <div className="bg-white p-8 rounded-[2.5rem] border border-gray-100 shadow-sm flex flex-col justify-between ">
+        <div className="bg-white p-8 rounded-xl border border-gray-100 shadow-sm flex flex-col justify-between ">
           <div>
             <div className="text-blue-400 mb-4 flex items-start gap-3 " ><Calendar size={24} />
             <h3 className="text-sm font-bold text-gray-400 uppercase tracking-wider mb-6">Daily Streak</h3>
@@ -56,17 +56,12 @@ const JourneySection = ({ points, streak, loading, canClaim, claiming, onClaim }
           </button>
         </div>
 
-        <div className="bg-linear-to-br from-purple-600 via-blue-500 to-cyan-400 p-[1.5px] rounded-[2.5rem] h-full shadow-lg">
+        <div className=" p-[1.5px] rounded-xl h-full shadow-lg">
           <div className="h-full w-full rounded-[2.4rem] p-8 relative overflow-hidden flex flex-col" style={{ background: `linear-gradient(135deg, #9013FE 0%, #70D6FF 100%) top / 100% 48% no-repeat, white` }}>
             <div className="flex justify-between items-start mb-4">
               <span className="bg-purple-400 text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-tighter">Featured</span>
-              <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
-                <div className="grid grid-cols-2 gap-0.5">
-                  <div className="w-2.5 h-2.5 bg-orange-400 rounded-sm"></div>
-                  <div className="w-2.5 h-2.5 bg-pink-500 rounded-full"></div>
-                  <div className="w-2.5 h-2.5 bg-purple-700 rounded-full"></div>
-                  <div className="w-2.5 h-2.5 bg-blue-500 rounded-sm"></div>
-                </div>
+              <div className="w-12 h-12  rounded-full flex items-center justify-center">
+               <img src={reclaim} alt="Reclaim" />
               </div>
             </div>
 

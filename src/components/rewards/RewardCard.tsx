@@ -17,7 +17,7 @@ const RewardCard = ({ reward, userPoints }: RewardCardProps) => {
   const isLocked = reward.type === 'Locked' || isInsufficientPoints
 
   return (
-    <div className="bg-white border border-gray-100 rounded-4xl p-8 flex flex-col items-center text-center shadow-sm hover:shadow-md transition-shadow ">
+    <div className="bg-white border border-purple-100 rounded-xl p-6 flex flex-col items-center text-center shadow-sm hover:shadow-md transition-shadow ">
       <div className="w-16 h-16 bg-purple-50 rounded-2xl flex items-center justify-center text-3xl mb-4">
         {reward.icon}
       </div>

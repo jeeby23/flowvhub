@@ -1,4 +1,4 @@
-import  { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { supabase } from '../../lib/supabaseClient';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -25,26 +25,49 @@ const EarnPointsView = () => {
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) return;
 
-      const { data, error } = await supabase.from('profiles').select('points, last_claim, streak').eq('id', user.id).single();
+      const { data: profile, error: profileError } = await supabase
+        .from('profiles')
+        .select('points, last_claim, streak')
+        .eq('id', user.id)
+        .single();
 
-      if (error || !data) {
+      // Logic for new user or missing profile
+      if (profileError || !profile) {
         setCanClaim(true);
-        await supabase.from('notifications').insert([{
-          user_id: user.id,
-          title: `Welcome, ${user.email?.split('@')[0]}!`,
-          message: "We're thrilled to have you on board! Explore powerful tools to boost productivity.",
-          is_read: false,
-        }]);
+
+        // FIX: Check if welcome notification already exists to prevent duplicates
+        const { data: existingNotif } = await supabase
+          .from('notifications')
+          .select('id')
+          .eq('user_id', user.id)
+          .ilike('title', 'Welcome%')
+          .limit(1);
+
+        if (!existingNotif || existingNotif.length === 0) {
+          await supabase.from('notifications').insert([{
+            user_id: user.id,
+            title: `Welcome, ${user.email?.split('@')[0]}!`,
+            message: "We're thrilled to have you on board! Explore powerful tools to boost productivity.",
+            is_read: false,
+          }]);
+        }
       } else {
-        setPoints(data.points || 0);
-        setStreak(data.streak || 1);
-        if (data.last_claim) {
-          const lastDate = new Date(data.last_claim);
+        setPoints(profile.points || 0);
+        setStreak(profile.streak || 1);
+        if (profile.last_claim) {
+          const lastDate = new Date(profile.last_claim);
           const nextAvailableDate = new Date(lastDate.getTime() + 24 * 60 * 60 * 1000);
           setCanClaim(new Date() >= nextAvailableDate);
-        } else { setCanClaim(true); }
+        } else {
+          setCanClaim(true);
+        }
       }
-    } catch (err) { console.error(err); setCanClaim(true); } finally { setLoading(false); }
+    } catch (err) {
+      console.error(err);
+      setCanClaim(true);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleClaimPoints = async () => {
@@ -56,17 +79,31 @@ const EarnPointsView = () => {
       const now = new Date().toISOString();
       const newPoints = points + 5;
 
-      const { error } = await supabase.from('profiles').upsert({ id: user.id, points: newPoints, last_claim: now, streak: streak });
+      const { error } = await supabase.from('profiles').upsert({ 
+        id: user.id, 
+        points: newPoints, 
+        last_claim: now, 
+        streak: streak 
+      });
+      
       if (error) throw error;
 
       await supabase.from('notifications').insert([{
-        user_id: user.id, title: 'Reward Claimed! 🎁', message: `Successfully claimed 5 Flowva points. Your new balance is ${newPoints} pts.`, is_read: false,
+        user_id: user.id, 
+        title: 'Reward Claimed! 🎁', 
+        message: `Successfully claimed 5 Flowva points. Your new balance is ${newPoints} pts.`, 
+        is_read: false,
       }]);
 
       setPoints(newPoints);
       setCanClaim(false);
       toast.success('Successfully claimed 5 points!');
-    } catch (err) { toast.error('Claim failed.'); console.error(err); } finally { setClaiming(false); }
+    } catch (err) {
+      toast.error('Claim failed.');
+      console.error(err);
+    } finally {
+      setClaiming(false);
+    }
   };
 
   return (
