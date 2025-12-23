@@ -19,7 +19,7 @@ Frontend: React 18, TypeScript, Vite.
 
 Styling: Tailwind CSS (including custom linear gradients and animations).
 
-Backend/Database: Supabase (Auth, PostgreSQL, Realtime, Storage).
+Backend/Database: Supabase (Auth, Storage).
 
 Icons: Lucide React.
 
