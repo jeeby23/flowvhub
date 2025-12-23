@@ -1,5 +1,3 @@
-import { Star } from 'lucide-react'
-
 interface Reward {
   id: number | string
   title: string

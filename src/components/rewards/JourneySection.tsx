@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Star, Calendar, Zap, Loader2, UserPlus } from 'lucide-react';
 import ClaimPointsModal from './ClaimPointsModal';
 

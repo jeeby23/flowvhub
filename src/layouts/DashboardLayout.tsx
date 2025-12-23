@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Outlet } from 'react-router-dom'
-import { Menu, ChevronLeft } from 'lucide-react'
+import { Menu} from 'lucide-react'
 import Sidebar from './Sidebar'
 
 const DashboardLayout = () => {

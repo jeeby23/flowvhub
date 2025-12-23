@@ -1,4 +1,3 @@
-import React from 'react'
 import { Users, Share2 } from 'lucide-react'
 
 const TasksSection = ({ onShareClick }: any) => (
@@ -23,7 +22,7 @@ const TasksSection = ({ onShareClick }: any) => (
           </div>
         </div>
       </div>
-      <div className="bg-white p-6 rounded border border-gray-100  hover:border-purple-500 hover:shadow-2xl shadow-sm flex items-center justify-between w-full md:w-[400px]">
+      <div className="bg-white p-6 rounded border border-gray-100  hover:border-purple-500 hover:shadow-2xl shadow-sm flex items-center justify-between w-full md:w-100">
         <div className="flex gap-4 items-center">
           <div className="w-12 h-12 bg-purple-50 rounded-2xl flex items-center justify-center text-purple-600">
             <Share2 />

@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import authFlow1 from '../assets/auth-flow.webp'
+import authFlow2 from '../assets/auth-flow-2.webp'
+import authFlow3 from '../assets/auth-flow-3.webp'
 
 interface AuthLayoutProps {
   children: React.ReactNode;
@@ -7,17 +10,11 @@ interface AuthLayoutProps {
 const AuthLayout = ({ children }: AuthLayoutProps) => {
   const [currentSlide, setCurrentSlide] = useState(0);
   
-  const slides = [
-    { 
-      url: '/src/assets/auth-flow.webp', 
-    },
-    { 
-      url: '/src/assets/auth-flow-2.webp', 
-    },
-    { 
-      url: '/src/assets/auth-flow-3.webp', 
-    }
-  ];
+ const slides = [
+  { url: authFlow1 },
+  { url: authFlow2 },
+  { url: authFlow3 },
+]
 
   useEffect(() => {
     const timer = setInterval(() => {

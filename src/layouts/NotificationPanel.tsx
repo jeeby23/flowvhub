@@ -74,9 +74,16 @@ const NotificationPanel = ({ onClose }: { onClose: () => void }) => {
           <button onClick={deleteAll} className="hover:underline cursor-pointer">
             Delete All
           </button>
+          <button
+            onClick={onClose}
+            className="hover:opacity-80 cursor-pointer"
+            aria-label="Close notifications"
+          >
+            ✕
+          </button>
         </div>
       </div>
-      <div className="max-h-[400px] overflow-y-auto p-2 scrollbar-hide">
+      <div className="max-h-100 overflow-y-auto p-2 scrollbar-hide">
         {notifications.length === 0 ? (
           <div className="h-40 flex flex-col items-center justify-center text-gray-300">
             <Bell size={32} className="mb-2" />

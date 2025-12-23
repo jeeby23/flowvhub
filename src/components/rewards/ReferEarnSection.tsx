@@ -1,5 +1,4 @@
-import React from 'react'
-import { Users, Copy, Facebook, Linkedin } from 'lucide-react'
+import {  Copy, Facebook, Linkedin } from 'lucide-react'
 import { FaWhatsapp } from 'react-icons/fa'
 import { toast } from 'react-toastify'
 
