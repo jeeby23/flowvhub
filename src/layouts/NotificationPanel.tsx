@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from 'react'
 import { Bell, CheckCircle2, Star, MoreVertical, Trash2 } from 'lucide-react'
 import { supabase } from '../lib/supabaseClient'
-import DeleteConfirmModal from '../components/rewards/DeleteConfirmModal' // Import the new component
+import DeleteConfirmModal from '../components/rewards/DeleteConfirmModal' 
 
 const NotificationPanel = ({ onClose }: { onClose: () => void }) => {
   const [notifications, setNotifications] = useState<any[]>([])
