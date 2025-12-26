@@ -8,7 +8,7 @@ const TasksSection = ({ onShareClick }: any) => (
     </div>
     <div className="flex flex-col md:flex-row gap-3 items-stretch">
       
-      <div className="bg-white p-6  border border-gray-100 hover:border-purple-500 hover:shadow-2xl shadow-sm flex items-center justify-between md:w-[450px] transition-all duration-300">
+      <div className="bg-white p-6  border border-gray-100 hover:border-purple-500 hover:shadow-2xl shadow-sm flex items-center justify-between md:w-112.5 transition-all duration-300">
         <div className="flex gap-4 items-center">
           <div className="w-12 h-12 bg-purple-50 rounded-2xl flex items-center justify-center text-purple-600 shrink-0">
             <Users size={24} />
@@ -24,7 +24,7 @@ const TasksSection = ({ onShareClick }: any) => (
         </div>
       </div>
 
-      <div className="bg-white p-6  border border-gray-100 hover:border-purple-500 hover:shadow-2xl shadow-sm flex items-center justify-between md:w-[450px] transition-all duration-300">
+      <div className="bg-white p-6  border border-gray-100 hover:border-purple-500 hover:shadow-2xl shadow-sm flex items-center justify-between md:w-112.5 transition-all duration-300">
         <div className="flex gap-4 items-center">
           <div className="w-12 h-12 bg-purple-50 rounded-2xl flex items-center justify-center text-purple-600 shrink-0">
             <Share2 size={24} />
